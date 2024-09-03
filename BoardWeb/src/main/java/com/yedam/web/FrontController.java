@@ -36,21 +36,15 @@ public class FrontController extends HttpServlet{
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		System.out.println("init 메서드");
 		//url 패턴 -> 실행되는기능 이메서드에 등록할 것임
 		map.put("/main.do", new MainControl()); //첫번째인수는 url패턴, 두번째는 실행되는 Controller
 		map.put("/sub.do", new SubControl()); //첫번째 인수에 따라 어떤 객체를 반환할것인지 (이것도만들어줘야함)
 		map.put("/intro.do", new IntroControl());
-		//기능등록.
-		map.put("/addMember.do", new AddMemberControl()); //회원등록페이지
-		map.put("/addForm.do", new AddFormControl()); //회원등록처리 페이지, 보안상 재요청하는메서드임
-			//등록은 화면이 2개필요, 보여주는거 1개, 처리하는거 1개
-		map.put("/memberList.do", new MemberListControl());
-		map.put("/getMember.do", new GetMemberControl()); //회원아이디로 상세조회
-		map.put("/modifyForm.do", new ModFormControl()); //상세조회페이지에서 수정페이지 호출
-		map.put("/modifyMember.do", new ModifyMemberControl()); //실제 수정처리하는 페이지
-		map.put("/removeMember.do", new RemoveMemberControl()); //삭제처리)
 		
+		Map<String, Control> memberMenu = MenuMember.getInstance().menuMap();
+		Map<String, Control> boardMenu = MenuBoard.getInstance().menuMap();
+		map.putAll(memberMenu); //멤버 관련 메뉴 추가
+		map.putAll(boardMenu); //게시글관련 메뉴추가.
 	}
 	//init에 보면 request,response 객체가 없음
 	
