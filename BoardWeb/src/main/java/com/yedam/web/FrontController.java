@@ -20,6 +20,7 @@ import com.yedam.control.MainControl;
 import com.yedam.control.MemberListControl;
 import com.yedam.control.ModFormControl;
 import com.yedam.control.ModifyMemberControl;
+import com.yedam.control.RemoveMemberControl;
 import com.yedam.control.SubControl;
 
 @WebServlet("*.do") //.do라는 패턴으로 끝이나는 요청이 들어오면 밑의 서블릿 클래스를 실행하겠다는 의미
@@ -48,6 +49,7 @@ public class FrontController extends HttpServlet{
 		map.put("/getMember.do", new GetMemberControl()); //회원아이디로 상세조회
 		map.put("/modifyForm.do", new ModFormControl()); //상세조회페이지에서 수정페이지 호출
 		map.put("/modifyMember.do", new ModifyMemberControl()); //실제 수정처리하는 페이지
+		map.put("/removeMember.do", new RemoveMemberControl()); //삭제처리)
 		
 	}
 	//init에 보면 request,response 객체가 없음
