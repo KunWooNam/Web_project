@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.mapper.MemberMapper">
+  <select id="memberList" resultType="com.yedam.vo.MemberVO">
+  	SELECT *
+  	FROM tbl_member
+  	ORDER BY member_id
+  </select>
+  
+  <insert id="insertMember" parameterType="com.yedam.vo.MemberVO">
+  	INSERT INTO tbl_member (member_id, member_name, password, email)
+  	VALUES(#{memberId}, #{memberName}, #{password}, #{email})
+  </insert>
+  
+  <update id="updateMember" parameterType="com.yedam.vo.MemberVO">
+  	UPDATE tbl_member 
+  	SET    member_name = #{memberName},
+  		   email = #{email},
+  		   password = #{password}
+  	WHERE  member_id = #{memberId}
+  </update>
+  
+  <!-- 주석: 회원삭제. -->
+  <delete id="deleteMember" parameterType="string">
+  	DELETE FROM tbl_member
+  	WHERE  member_id = #{memberId}
+  </delete>
+  
+  <!-- 단건조회: 회원추가시 회원아이디 존재하는지 검증용 -->
+  <select id="selectMember" parameterType="string" resultType="com.yedam.vo.MemberVO">
+  	SELECT member_id,
+  	       member_name,
+  	       password,
+  	       email,
+  	       creation_date
+  	FROM   tbl_member
+  	WHERE  member_id = #{memberId}
+  </select>
+</mapper>
