@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,14 +18,21 @@
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
+                <div class="sidebar-heading border-bottom bg-light">게시판 짓는중</div>
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="addForm.do">회원등록</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberList.do">회원목록</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href=""></a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do">게시글목록</a>
+                    <c:choose>
+                    <c:when test="${empty logid}"> <!-- 로그아웃 상태인 경우 -->
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="loginForm.do">로그인화면으로(이동)</a>
+                    </c:when>
+                    <c:otherwise> <!-- 로그인 상태인 경우 -->
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="loginForm.do">로그아웃화면으로(이동)</a>
+                    </c:otherwise>
+                    </c:choose>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile(미완)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status(미완)</a>
                 </div>
             </div>
             <!-- Page content wrapper-->
