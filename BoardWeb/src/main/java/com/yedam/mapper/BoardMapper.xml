@@ -16,13 +16,25 @@
 	  </select>
 	  
 	  <!-- 페이지별 조회 -->
-	  <select id="selectListPaging" resultType="board" parameterType="int">
+	  <select id="selectListPaging" resultType="board" parameterType="com.yedam.common.SearchDTO">
 	  select c.*
 	  from
 	      (select rownum rn, b.*
 	       from 
 	           (select *
 	           from tbl_board
+	           where 
+	           <choose>
+	           	<when test="searchCondition == 'T'.toString() "><!--'searchCondition == "T" '이렇게도가능  -->
+	           	 title like '%'||#{keyword}||'%'
+	           	</when>
+	           	<when test="searchCondition == 'W'.toString() "><!--'searchCondition == "W" '이렇게도가능  -->
+	           	 writer like '%'||#{keyword}||'%'
+	           	</when>
+	           	<otherwise>
+	           		title like '%'||#{keyword}||'%' or writer like '%' ||#{keyword} ||'%'
+	           	</otherwise>
+	           </choose>
 	           order by board_no desc) b
 	       <![CDATA[ 
 	       where rownum <= #{page} * 5) c 
@@ -31,12 +43,13 @@
 	  </select>
 	  
 	  <insert id="insertBoard" parameterType="board">
-	  	INSERT INTO tbl_board (board_no, title, content, writer)
+	  	INSERT INTO tbl_board (board_no, title, content, writer, image)
 		VALUES(
 		       BOARD_SEQ.NEXTVAL,
 		       #{title},
 		       #{content},
-		       #{writer}
+		       #{writer},
+		       #{image}
 		       )
 	  </insert>
 	  
@@ -65,13 +78,26 @@
 	  		   content,
 	  		   writer,
 	  		   view_cnt,
-	  		   creation_date
+	  		   creation_date,
+	  		   image
 	  	FROM   tbl_board
 	  	WHERE  board_no = #{boardNo}
 	  </select>
 	  
-	  <select id="selectCount" resultType="int">
+	  <select id="selectCount" resultType="int" parameterType="com.yedam.common.SearchDTO">
 	  	SELECT count(1)
 	  	FROM   tbl_board
+	  	WHERE
+	  		<choose>
+	           	<when test="searchCondition == 'T'.toString() "><!--'searchCondition == "T" '이렇게도가능  -->
+	           	 title like '%'||#{keyword}||'%'
+	           	</when>
+	           	<when test="searchCondition == 'W'.toString() "><!--'searchCondition == "W" '이렇게도가능  -->
+	           	 writer like '%'||#{keyword}||'%'
+	           	</when>
+	           	<otherwise>
+	           		title like '%'||#{keyword}||'%' or writer like '%' ||#{keyword} ||'%'
+	           	</otherwise>
+	        </choose>
 	  </select>
 </mapper>

@@ -12,4 +12,5 @@ public class BoardVO {
 	private String writer;
 	private int viewCnt;
 	private Date creationDate;
+	private String image;
 }

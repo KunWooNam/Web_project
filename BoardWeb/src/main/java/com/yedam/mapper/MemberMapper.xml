@@ -38,4 +38,18 @@
   	FROM   tbl_member
   	WHERE  member_id = #{memberId}
   </select>
+  
+  <!-- 로그인 시 회원여부 조회 -->
+  <select id="loginMember" resultType="com.yedam.vo.MemberVO">
+    SELECT member_id,
+  	       member_name,
+  	       password,
+  	       email,
+  	       creation_date
+  	FROM   tbl_member
+  	WHERE  member_id = #{id}
+  	  AND  password = #{pw}
+  </select> 
+  
+  
 </mapper>

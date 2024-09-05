@@ -8,12 +8,18 @@ import com.yedam.vo.BoardVO;
 
 public class AppTest {
 	public static void main(String[] args) {
-		BoardVO board = new BoardVO();
-		board.setTitle("입력테스트");
-		board.setContent("수정-내용입니다.");
-		board.setBoardNo(2053);
+		SearchDTO search = new SearchDTO();
+		search.setSearchCondition("TW");
+		search.setKeyword("JAVA");
+		search.setPage(1);
+		
 		//목록
 		BoardService svc = new BoardServiceImpl();
+		
+		svc.boardList(search).forEach(System.out::println); 
+		
+		
+		
 //		svc.addBoard(board);
 //		svc.modifyBoard(board);
 //		svc.removeBoard(3);

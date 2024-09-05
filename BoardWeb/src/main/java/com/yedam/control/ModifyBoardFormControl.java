@@ -11,23 +11,35 @@ import com.yedam.service.BoardService;
 import com.yedam.service.BoardServiceImpl;
 import com.yedam.vo.BoardVO;
 
-public class ModifyBoardControl implements Control {
+public class ModifyBoardFormControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String bno = request.getParameter("bno");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
 		String sc = request.getParameter("searchCondition");
 		String kw = request.getParameter("keyword");
 		String page = request.getParameter("page");
+		
 		request.setAttribute("sc", sc);
 		request.setAttribute("kw", kw);
 		request.setAttribute("page", page);
 		BoardService svc = new BoardServiceImpl();
 		BoardVO board = svc.getBoard(Integer.parseInt(bno));
-		request.setAttribute("boardInfo", board);
-		request.setAttribute("bno", board.getBoardNo());
+		board.setTitle(title);
+		board.setContent(content);
+		request.setAttribute("board", board);
 		
-		request.getRequestDispatcher("WEB-INF/board/modifyBoard.jsp").forward(request, response);
+		if(svc.modifyBoard(board)) {
+			System.out.println(board.toString());
+			System.out.println("page : " + page);
+			response.sendRedirect("boardList.do?page=" + page + "&searchCondition=" + sc + "&keyword" + kw);
+		} else {
+			request.setAttribute("message", "변경 중 오류가 발생했습니다.");
+			request.getRequestDispatcher("WEB-INF/board/modifyBoard.jsp").forward(request, response);
+		}
 	}
 
 }
