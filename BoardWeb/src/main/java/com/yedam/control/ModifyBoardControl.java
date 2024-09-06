@@ -27,7 +27,7 @@ public class ModifyBoardControl implements Control {
 		request.setAttribute("boardInfo", board);
 		request.setAttribute("bno", board.getBoardNo());
 		
-		request.getRequestDispatcher("WEB-INF/board/modifyBoard.jsp").forward(request, response);
+		request.getRequestDispatcher("board/modifyBoard.tiles").forward(request, response);
 	}
 
 }

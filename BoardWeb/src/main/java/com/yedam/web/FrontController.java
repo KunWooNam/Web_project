@@ -16,6 +16,7 @@ import com.yedam.control.AddFormControl;
 import com.yedam.control.AddMemberControl;
 import com.yedam.control.GetMemberControl;
 import com.yedam.control.IntroControl;
+import com.yedam.control.JavaScriptControl;
 import com.yedam.control.MainControl;
 import com.yedam.control.MemberListControl;
 import com.yedam.control.ModFormControl;
@@ -23,7 +24,7 @@ import com.yedam.control.ModifyMemberControl;
 import com.yedam.control.RemoveMemberControl;
 import com.yedam.control.SubControl;
 
-@WebServlet("*.do") //.do라는 패턴으로 끝이나는 요청이 들어오면 밑의 서블릿 클래스를 실행하겠다는 의미
+//@WebServlet("*.do") //.do라는 패턴으로 끝이나는 요청이 들어오면 밑의 서블릿 클래스를 실행하겠다는 의미
 public class FrontController extends HttpServlet{
 	
 	//url pattern - 실행되는 기능 -> map 컬렉션에 지정.
@@ -40,6 +41,7 @@ public class FrontController extends HttpServlet{
 		map.put("/main.do", new MainControl()); //첫번째인수는 url패턴, 두번째는 실행되는 Controller
 		map.put("/sub.do", new SubControl()); //첫번째 인수에 따라 어떤 객체를 반환할것인지 (이것도만들어줘야함)
 		map.put("/intro.do", new IntroControl());
+		map.put("/javascript.do", new JavaScriptControl() );
 		
 		Map<String, Control> memberMenu = MenuMember.getInstance().menuMap();
 		Map<String, Control> boardMenu = MenuBoard.getInstance().menuMap();

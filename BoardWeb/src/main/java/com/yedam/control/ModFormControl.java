@@ -22,7 +22,7 @@ public class ModFormControl implements Control {
 		MemberVO mvo = svc.getMember(id);
 		
 		request.setAttribute("memberInfo", mvo);
-		request.getRequestDispatcher("WEB-INF/html/modifyForm.jsp").forward(request, response); 
+		request.getRequestDispatcher("html/modifyForm.tiles").forward(request, response); 
 	}
 
 }

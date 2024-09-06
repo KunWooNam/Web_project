@@ -32,7 +32,7 @@ public class ModifyMemberControl implements Control {
 			response.sendRedirect("memberList.do");
 		} else {
 			request.setAttribute("message", "수정중에 오류가 발생하였습니다.");
-			request.getRequestDispatcher("WEB-INF/html/memberList.jsp").forward(request, response);
+			request.getRequestDispatcher("html/memberList.tiles").forward(request, response);
 		}
 	}
 

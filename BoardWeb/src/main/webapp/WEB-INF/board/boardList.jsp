@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> <!-- 날짜별 포맷지원하는 태그들 쓰기위함 -->
-<jsp:include page="../includes/header.jsp"></jsp:include>
 
 	<h3>게시글 목록</h3>
 	<!-- 검색기능 -->
@@ -110,4 +109,3 @@
 	</c:if>
 	
 	
-<jsp:include page="../includes/footer.jsp"></jsp:include>

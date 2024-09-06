@@ -36,7 +36,7 @@ public class RemoveControl implements Control {
 			request.setAttribute("message", "삭제 권한이 없습니다!");
 			request.setAttribute("board", board);
 			request.setAttribute("page", page);
-			request.getRequestDispatcher("WEB-INF/board/board.jsp").forward(request, response);
+			request.getRequestDispatcher("board/board.tiles").forward(request, response);
 			
 			return;
 		}

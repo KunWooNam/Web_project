@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+  <definition name="myapp.homepage" template="/layouts/classic.jsp">
+    <put-attribute name="title" value="Tiles tutorial homepage" />
+    <put-attribute name="header" value="/tiles/banner.jsp" />
+    <put-attribute name="menu" value="/tiles/common_menu.jsp" />
+    <put-attribute name="body" value="/tiles/home_body.jsp" />
+    <put-attribute name="footer" value="/tiles/credits.jsp" />
+  </definition>
+  
+  <definition name="myapp.common" template="/WEB-INF/layout/template.jsp">
+    <put-attribute name="title" value="일반사용자 homepage" />
+    <put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
+    <put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+    <put-attribute name="body" value="/WEB-INF/layout/body.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+  </definition>
+  
+   <definition name="myapp.admin" template="/WEB-INF/layoutAdmin/template.jsp">
+    <put-attribute name="title" value="관리자용 homepage" />
+    <put-attribute name="header" value="/WEB-INF/layoutAdmin/header.jsp"/>
+    <put-attribute name="menu" value="/WEB-INF/layoutAdmin/menu.jsp" />
+    <put-attribute name="body" value="/WEB-INF/layoutAdmin/body.jsp" /> <!-- 우선작업 -->
+    <put-attribute name="footer" value="/WEB-INF/layoutAdmin/footer.jsp" />
+  </definition>
+  
+ 
+  
+   <!-- 위의 myapp.admin을 확장해서사용 --> <!-- extends된 definition은 위치가 중요함 위에있는것이 먼저 적용됨 -->
+  <definition name="WILDCARD:admin/*" extends="myapp.admin"><!-- tiles로끝나는 url쓰면 밑의 value값을쓰겠다라는 것 -->
+  	<put-attribute name="body" value="/WEB-INF/html/{1}.jsp"/> <!-- tiles앞부분을 받아올때 wildcard를사용  -->
+  </definition>
+  
+  <!-- html안에 있는 것을 보여주지 않기위함. (보안) -->
+  <definition name="WILDCARD:html/*" extends="myapp.common">
+  	<put-attribute name="body" value="/WEB-INF/html/loc.jsp"/>
+  </definition>
+  
+  <!-- 위의 myapp.common을 확장해서사용 -->
+  <definition name="WILDCARD:*/*" extends="myapp.common"><!-- tiles로끝나는 url쓰면 밑의 value값을쓰겠다라는 것 -->
+  	<put-attribute name="body" value="/WEB-INF/{1}/{2}.jsp"/> <!-- tiles앞부분을 받아올때 wildcard를사용  -->
+  </definition>
+</tiles-definitions>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="../includes/header.jsp"></jsp:include>
 	<%
 	//자바 영역, 자바주석사용가능
 	String message = (String) request.getAttribute("message");
@@ -21,6 +20,5 @@
 		</td></tr> 
 		</table>
 	</form>
-	<jsp:include page="../includes/footer.jsp"></jsp:include>
 </body>
 </html>

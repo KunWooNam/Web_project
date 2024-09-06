@@ -61,7 +61,10 @@
 		  	</if>
 		  	<if test="content != null">
 		  		,content = #{content} <!-- 여기의 콤마 -->
-		  	</if>>  
+		  	</if>
+		  	<if test="content != null">
+		  		,image = #{image} <!-- 여기의 콤마 -->
+		  	</if>   
 	  	</set>
 	  	WHERE board_no = #{boardNo}
 	  </update>

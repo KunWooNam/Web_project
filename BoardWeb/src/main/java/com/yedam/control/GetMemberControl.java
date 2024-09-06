@@ -23,7 +23,7 @@ public class GetMemberControl implements Control {
 		MemberVO mvo = svc.getMember(id);
 		
 		request.setAttribute("memberInfo", mvo);
-		request.getRequestDispatcher("WEB-INF/html/memberInfo.jsp").forward(request, response); //request에 객체(MemberVO) 참조값을 담아전달
+		request.getRequestDispatcher("html/memberInfo.tiles").forward(request, response); //request에 객체(MemberVO) 참조값을 담아전달
 	}
 
 }

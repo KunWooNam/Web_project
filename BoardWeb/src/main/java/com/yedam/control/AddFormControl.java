@@ -14,7 +14,7 @@ public class AddFormControl implements Control {
 	public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//addForm.do 요청 -> 요청재지정(WEB-INF/html/addForm.jsp)
 		request.setAttribute("msg", "Hello, World"); //request 객체에 msg 전달.
-		request.getRequestDispatcher("WEB-INF/html/addForm.jsp").forward(request, response);
+		request.getRequestDispatcher("html/addForm.tiles").forward(request, response);
 		//디스패쳐 = 배분, JSP는 너무 불편함. 보안과 편리상 디스패쳐를 사용함.
 		
 		//커밋테스트용 수정

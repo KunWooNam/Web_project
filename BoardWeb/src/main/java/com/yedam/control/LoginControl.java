@@ -26,7 +26,7 @@ public class LoginControl implements Control {
 		
 		if(member == null) {
 			request.setAttribute("message", "아이디와 비밀번호를 확인하세요!");
-			request.getRequestDispatcher("WEB-INF/html/logForm.jsp").forward(request, response);
+			request.getRequestDispatcher("html/logForm.tiles").forward(request, response);
 			return;
 		}
 		
@@ -35,7 +35,12 @@ public class LoginControl implements Control {
 		session.setAttribute("logid", id); //세션정보는 접속브라우저마다 각각 다른값임. 전부다 다른객체, 사용자가입력한 id값
 		session.setAttribute("logName", member.getMemberName()); //추가정보(필요한경우 이렇게 사용할수있다 정도)
 		
-		response.sendRedirect("boardList.do");
+		//일반사용자, 관리자용 main 페이지를 다른 템플릿에서 실행
+		if(member.getAuthority().equals("User")) {
+			request.getRequestDispatcher("main/main.tiles").forward(request, response);
+		} else if (member.getAuthority().equals("admin")) {
+			request.getRequestDispatcher("admin/main.tiles").forward(request, response);
+		}
 		
 	}
 

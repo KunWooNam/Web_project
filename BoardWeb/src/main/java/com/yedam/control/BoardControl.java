@@ -41,7 +41,7 @@ public class BoardControl implements Control {
 		request.setAttribute("kw", kw);
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/board/board.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("board/board.tiles");
 		rd.forward(request, response);	
 		}
 
