@@ -1,8 +1,8 @@
 /**
- * 
+ * basic.js4
  */
-console.log(json); //문자열
-let data = JSON.parse(json); //문자열 -> 객체변경
+console.log(json); //문자열)
+let data = JSON.parse(json); //문자열 -> 객체변경 (파싱작업)->객체가됨
 console.log(data); //객체
 console.clear(); //보기 더러우니까 위에꺼 지우기
 

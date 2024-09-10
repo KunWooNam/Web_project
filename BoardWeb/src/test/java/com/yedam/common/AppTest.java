@@ -2,32 +2,26 @@ package com.yedam.common;
 
 
 
-import com.yedam.service.BoardService;
-import com.yedam.service.BoardServiceImpl;
-import com.yedam.vo.BoardVO;
+import org.apache.ibatis.session.SqlSession;
+
+import com.yedam.mapper.ReplyMapper;
+import com.yedam.service.ReplyService;
+import com.yedam.service.ReplyServiceImpl;
+import com.yedam.vo.ReplyVO;
 
 public class AppTest {
 	public static void main(String[] args) {
-		SearchDTO search = new SearchDTO();
-		search.setSearchCondition("TW");
-		search.setKeyword("JAVA");
-		search.setPage(1);
-		
-		//목록
-		BoardService svc = new BoardServiceImpl();
-		
-		svc.boardList(search).forEach(System.out::println); 
+		SqlSession sqlSession = DataSource.getInstance().openSession(true);
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 		
 		
+		ReplyVO replyVO = new ReplyVO();
+		replyVO.setReplyer("user01");
+		replyVO.setBoardNo(148);
+		replyVO.setReply("댓글 등록 테스트중");
+		ReplyService rs = new ReplyServiceImpl();
 		
-//		svc.addBoard(board);
-//		svc.modifyBoard(board);
-//		svc.removeBoard(3);
-		
-//		System.out.println(svc.getBoard(board.getBoardNo()));
-		
-//		svc.boardList().forEach(System.out::println);
-		//board(매개값으로만 전달됨) -> System.out.println(board) 
-		//->(줄여서) System.out.println
+		mapper.addReply(replyVO);
+				
 	}
 }

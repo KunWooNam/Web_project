@@ -3,6 +3,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> <!-- 이건 왜? -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<style>
+	div.reply div {
+		margin: auto;
+	}
+	div.reply ul {
+		list-style-type: none;
+	}
+	div.reply span{
+		disply: inline-block;
+	}
+</style>
 <h3>글 상세 페이지</h3>
 <p>searchCondition: ${sc}, keyword: ${kw}</p>
 	<table class="table">
@@ -40,6 +51,39 @@
 	 	</c:if>
  	</div>
  	
+ 	<!-- 댓글관련 -->
+ 	<div class="container reply">
+ 	
+ 	 <!-- 댓글등록 -->
+ 	 <div class="header">
+ 	 	<input type="text" id="reply" class="col-sm-6"> <!-- 너비 12등분 중 8을 차지 -->
+ 	 	<button id="addReply" class="btn btn-primary">댓글등록</button>
+ 	 </div>
+ 	 <!-- 댓글목록 -->
+ 	 <div class="content">
+	 	 <ul>
+	 	 	<li>
+	 	 		<span class="col-sm-2">글번호</span>
+	 	 		<span class="col-sm-5">댓글내용</span>
+	 	 		<span class="col-sm-2">작성자</span>
+	 	 		<span class="col-sm-2">삭제</span>
+	 	 	</li>
+	 	 	<li>
+	 	 		<hr/>
+	 	 	</li>
+	 	 	<li id="template">
+	 	 		<span class="col-sm-2">24</span>
+	 	 		<span class="col-sm-5">내용테스트중</span>
+	 	 		<span class="col-sm-2">user01</span>
+	 	 		<span class="col-sm-2"><button class="btn btn-danger" id="delBtn">삭제</button></span>
+	 	 	</li>
+	 	 </ul>
+ 	 </div>
+ 	 <!-- 댓글페이징 -->
+ 	 
+ 	</div>
+ 	
+ 	
 	<!-- 컨트롤하기 위한 폼 -->
 	<form action="removeBoard.do" name="actForm">
 		<input type="hidden" name="keyword" value="${kw}">
@@ -48,10 +92,18 @@
 		<input type="hidden" name="bno" value="${board.boardNo}">
 	</form>
 
+	
+
 	<script>
+	const bno = '${board.boardNo}'; //원본글번호
+	const writer = '${logid}'; //로그인 정보.
+	
 	function form_submit(uri){
 		//매개값으로 이동할 컨트롤을 받아서 파라미터를 전달
 		document.forms.actForm.action = uri; 
 		document.forms.actForm.submit();
 	}
 	</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- 알림창 라이브러리 -->
+	<script defer src="js/replyService.js"></script>
+	<script defer src="js/replyBoard.js"></script>
