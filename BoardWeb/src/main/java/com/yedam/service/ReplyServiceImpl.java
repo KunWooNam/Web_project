@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.yedam.common.DataSource;
+import com.yedam.common.SearchDTO;
 import com.yedam.mapper.ReplyMapper;
 import com.yedam.vo.ReplyVO;
 
@@ -14,9 +15,9 @@ public class ReplyServiceImpl implements ReplyService {
 	ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 	
 	@Override
-	public List<ReplyVO> replyList(int bno) {
-		
-		return mapper.selectList(bno);
+	public List<ReplyVO> replyList(SearchDTO search) {
+		return mapper.selectList(search.getBoardNo()); //기존사용
+		//return mapper.selectListPaging(search);
 	}
 
 	@Override
@@ -34,6 +35,11 @@ public class ReplyServiceImpl implements ReplyService {
 		int rno = mapper.selectKey();
 		reply.setReplyNo(rno);
 		return mapper.addReply(reply) == 1;
+	}
+
+	@Override
+	public int getReplyCount(int bno) {
+		return mapper.selectReplyCount(bno);
 	}
 	
 	

@@ -17,11 +17,6 @@ div.reply span {
 	display: inline-block;
 }
 </style>
-<link rel="stylesheet" href="//cdn.datatables.net/2.1.5/css/dataTables.dataTables.min.css"> <!-- datatables 라이브러리를 위한 작업 -->
- <!-- datatables 라이브러리를 위한 작업 -->
-<script src="js/jquery-3.7.1.js"></script>
-<script src="js/dataTables.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- 알림창 라이브러리 -->
 
 <script defer src="js/replyService.js"></script>
@@ -90,26 +85,32 @@ div.reply span {
 	</div>
 	
 	<!-- 댓글목록 -->
-	<table id="example" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>댓글번호</th>
-                <th>댓글내용</th>
-                <th>댓글작성자</th>
-                <th>작성일시</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>댓글번호</th>
-                <th>댓글내용</th>
-                <th>댓글작성자</th>
-                <th>작성일시</th>
-            </tr>
-        </tfoot>
-    </table>
-	<!-- 댓글페이징 -->
+	<div class="content">
+		<ul>
+			<li>
+				<span class="col-sm-2">글번호</span> 
+				<span class="col-sm-5">댓글내용</span>
+				<span class="col-sm-2">작성자</span> 
+				<span class="col-sm-2">삭제</span>
+			</li>
+			<li>
+				<hr />
+			</li>
+			<li id="template">
+				<span class="col-sm-2">24</span> 
+				<span class="col-sm-5">내용테스트중</span> 
+				<span class="col-sm-2">user01</span>
+				<span class="col-sm-2"><button class="btn btn-danger" id="delBtn">삭제</button></span>
+			</li>
+		</ul>
+	</div>
 	
+	<!-- 댓글페이징 -->
+	<nav aria-label="..." >
+		<ul class="pagination">
+			
+		</ul>
+	</nav>
 	
 </div>
 
@@ -132,4 +133,3 @@ div.reply span {
 	}
 </script>
 
-<script src="js/boardTable.js"></script>

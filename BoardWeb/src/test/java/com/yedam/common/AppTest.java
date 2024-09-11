@@ -14,14 +14,10 @@ public class AppTest {
 		SqlSession sqlSession = DataSource.getInstance().openSession(true);
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 		
+		SearchDTO search = new SearchDTO();
+		search.setBoardNo(521);
+		search.setPage(1);
 		
-		ReplyVO replyVO = new ReplyVO();
-		replyVO.setReplyer("user01");
-		replyVO.setBoardNo(148);
-		replyVO.setReply("댓글 등록 테스트중");
-		ReplyService rs = new ReplyServiceImpl();
-		
-		mapper.addReply(replyVO);
-				
+		mapper.selectListPaging(search).forEach(reply -> System.out.println(reply.toString()));
 	}
 }

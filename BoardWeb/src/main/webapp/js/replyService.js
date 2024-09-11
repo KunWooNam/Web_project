@@ -54,7 +54,8 @@ function makeRow(reply = {}) {
 	btn = document.createElement('button'); //<button>삭제</button>
 	btn.innerHTML = '삭제';
 	btn.addEventListener('click', deleteRowFnc); //함수이름만 넣어줘야 이벤트발생시 함수실행
-
+	/*let p = document.querySelector().value
+	btn.setAttribute('data-page', p)*/
 	td = document.createElement('td'); //<td><button>삭제</button></td>
 	td.appendChild(btn);
 	tr.appendChild(td);
@@ -65,8 +66,8 @@ function makeRow(reply = {}) {
 // Service() 라고하는 메서드를 통해서 ajax기능을 실행.
 // 1. 목록기능 2. 삭제기능 3. 추가기능 4...(추가예정)
 const svc = {
-	replyList: function(bno = 149, successCallback, erroCallback) {
-		fetch('replyList.do?bno=' + bno)
+	replyList: function(param={bno:521, page:1} , successCallback, erroCallback) {
+		fetch('replyList.do?bno=' + param.bno +'&page=' + param.page)
 			.then(resolve => resolve.json()) //결과를 다 json으로 변환하게금 해놨음
 			.then(successCallback) //셋 중 뭐가 실행될지모름, 매개값에따라 다름
 			.catch(erroCallback)
@@ -75,7 +76,7 @@ const svc = {
 		fetch('removeReply.do?rno=' + rno)
 			.then(resolve => resolve.json()) //결과를 다 json으로 변환하게금 해놨음
 			.then(successCallback) //셋 중 뭐가 실행될지모름, 매개값에따라 다름
-			.catch(erroCallback)
+			.catch(errorCallback)
 	},
 	addReply(param = { bno, reply, replyer }, successCallback, errorCallback) {
 		fetch('addReply.do', {
@@ -86,5 +87,14 @@ const svc = {
 			.then(resolve => resolve.json()) //결과를 다 json으로 변환하게금 해놨음
 			.then(successCallback) //셋 중 뭐가 실행될지모름, 매개값에따라 다름
 			.catch(errorCallback)
+	},
+	/*댓글 건수를 가져와서 페이징 정보를 생성. replyPaginCount */
+	replyPagingCount(bno = 521, successCallback, errorCallback){
+		fetch('replyCount.do?bno=' + bno)
+		.then(resolve => resolve.json())
+		.then(successCallback)
+		.catch(errorCallback)
 	}
 }
+
+

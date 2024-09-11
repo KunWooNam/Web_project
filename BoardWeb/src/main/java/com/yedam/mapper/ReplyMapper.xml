@@ -3,40 +3,60 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yedam.mapper.ReplyMapper">
- 
- <select id="selectList" parameterType="int" >
- 	SELECT reply_no
- 		   ,replyer
- 		   ,reply
- 		   ,board_no
- 		   ,reply_date
- 	FROM   tbl_reply
- 	WHERE  board_no = #{bno}
- 	ORDER BY reply_no
- </select>
-  
-  <delete id="deleteReply" parameterType="int">
-  	DELETE FROM tbl_reply
- 	WHERE   reply_no = #{rno}
-  </delete>
-  
-  <!-- 다건삭제 -->
-  <delete id="deleteReplys" parameterType="string">
-  	DELETE FROM tbl_reply
-  	WHERE  reply_no IN 
-  	<foreach collection="array" item="reply" open="( " separator="," close=" )">
-  		#{reply}
-  	</foreach>
-  </delete>
-  
-  <!-- 한건 등록 -->
-  <insert id="addReply" parameterType="com.yedam.vo.ReplyVO">
-  INSERT INTO tbl_reply (reply_no, replyer, reply, board_no)
-  VALUES (#{replyNo}, #{replyer}, #{reply}, #{boardNo})
-  </insert>
-  
-  <select id="selectKey" resultType="int">
-  SELECT reply_seq.nextval
-  FROM dual
-  </select>
+
+	<select id="selectList" parameterType="int">
+		SELECT reply_no
+		,replyer
+		,reply
+		,board_no
+		,reply_date
+		FROM tbl_reply
+		WHERE board_no = #{bno}
+		ORDER BY reply_no
+	</select>
+
+	<delete id="deleteReply" parameterType="int">
+		DELETE FROM tbl_reply
+		WHERE reply_no = #{rno}
+	</delete>
+
+	<!-- 다건삭제 -->
+	<delete id="deleteReplys" parameterType="string">
+		DELETE FROM tbl_reply
+		WHERE reply_no IN
+		<foreach collection="array" item="reply" open="( "
+			separator="," close=" )">
+			#{reply}
+		</foreach>
+	</delete>
+
+	<!-- 한건 등록 -->
+	<insert id="addReply" parameterType="com.yedam.vo.ReplyVO">
+		INSERT INTO tbl_reply (reply_no, replyer, reply, board_no)
+		VALUES (#{replyNo}, #{replyer}, #{reply}, #{boardNo})
+	</insert>
+
+	<select id="selectKey" resultType="int">
+		SELECT reply_seq.nextval
+		FROM dual
+	</select>
+
+	<select id="selectListPaging" parameterType="com.yedam.common.SearchDTO">
+		select b.*
+		from(
+		select /*+INDEX_DESC (r PK_REPLY) */ rownum rn, r.*
+			from tbl_reply r
+			where board_no = #{boardNo}) b
+			<![CDATA[ 
+	       where b.rn <= #{page} * 5 
+	       ]]> <!-- 여는괄호("<")만 문제가 생겨서 이렇게함. 쿼리전체를 감싸도 상관없음 -->
+			 and b.rn > (#{page} - 1) * 5
+	</select>
+	
+	<!-- 글번호에 따라 댓글 총갯수 반환 -->
+	<select id="selectReplyCount" parameterType="int">
+		select count (1)
+		from   tbl_reply
+		where  board_no = #{bno}
+	</select>
 </mapper>

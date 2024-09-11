@@ -8,4 +8,5 @@ public class SearchDTO {
 	private String searchCondition;
 	private String keyword;
 	private int page;
+	private int boardNo; //몇번글의 댓글
 }
