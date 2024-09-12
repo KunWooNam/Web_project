@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.yedam.common.Control;
 import com.yedam.control.AddFormControl;
 import com.yedam.control.AddMemberControl;
+import com.yedam.control.EventControl;
 import com.yedam.control.GetMemberControl;
 import com.yedam.control.IntroControl;
 import com.yedam.control.JavaScriptControl;
@@ -42,6 +43,11 @@ public class FrontController extends HttpServlet{
 		map.put("/sub.do", new SubControl()); //첫번째 인수에 따라 어떤 객체를 반환할것인지 (이것도만들어줘야함)
 		map.put("/intro.do", new IntroControl());
 		map.put("/javascript.do", new JavaScriptControl() );
+		
+		//fullCalendar 관련
+		map.put("/eventList.do", new EventControl());
+		map.put("/addEvent.do", new EventControl());
+		map.put("/removeEvent.do", new EventControl());
 		
 		Map<String, Control> memberMenu = MenuMember.getInstance().menuMap();
 		Map<String, Control> boardMenu = MenuBoard.getInstance().menuMap();

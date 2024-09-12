@@ -59,4 +59,27 @@
 		from   tbl_reply
 		where  board_no = #{bno}
 	</select>
+	
+	<!--  fullcalendar 일정.-->
+	<select id="selectEvent" useCache="false" resultType="map">
+		select title as "title"
+			   ,start_date as "start"
+			   ,end_date as "end"
+	    from tbl_calendar
+	</select>
+	
+	<!-- 일정추가 -->
+	<insert id="insertEvent" parameterType="com.yedam.common.SearchDTO">
+		insert into tbl_calendar 
+		values(#{title}, #{start}, #{end})
+		
+	</insert>
+	
+	<!-- 일정삭제 -->
+	<delete id="deleteEvent" parameterType="com.yedam.common.SearchDTO">
+		delete from tbl_calendar
+		where title = #{title}
+		and   start_date = #{start}
+		and   end_date = #{end}
+	</delete>
 </mapper>

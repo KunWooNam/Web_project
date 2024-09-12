@@ -6,6 +6,8 @@
   <settings>
   	<setting name="mapUnderscoreToCamelCase" value="true"/>
   	<setting name="jdbcTypeForNull" value="NULL" />
+  	<setting name="cacheEnabled" value="false"></setting> <!-- 캐시안쓰게조정 -->
+  	<setting name="localCacheScope" value="STATEMENT"></setting> <!-- 캐시안쓰게조정 -->
   </settings>
   <typeAliases>
   	<typeAlias type="com.yedam.vo.BoardVO" alias="board"/>

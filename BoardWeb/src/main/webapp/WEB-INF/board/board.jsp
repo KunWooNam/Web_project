@@ -25,7 +25,7 @@ div.reply span {
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- 알림창 라이브러리 -->
 
 <script defer src="js/replyService.js"></script>
-<script defer src="js/replyBoard.js"></script>
+<!-- <script defer src="js/replyBoard.js"></script> -->
 <script>
 	const bno = '${board.boardNo}'; //원본글번호
 	const writer = '${logid}'; //로그인 정보.
@@ -87,6 +87,7 @@ div.reply span {
 		<input type="text" id="reply" class="col-sm-9">
 		<!-- 너비 12등분 중 8을 차지 -->
 		<button id="addReply" class="btn btn-primary">댓글등록</button>
+		<button id="delReply" class="btn btn-danger">댓글삭제</button>
 	</div>
 	
 	<!-- 댓글목록 -->
@@ -99,6 +100,7 @@ div.reply span {
                 <th>작성일시</th>
             </tr>
         </thead>
+       
         <tfoot>
             <tr>
                 <th>댓글번호</th>
