@@ -74,16 +74,16 @@ public class EventControl implements Control {
 		event.setTitle(title);
 		event.setStart(start);
 		event.setEnd(end);
-	try {
-		if(svc.addEvent(event)) {
-			//{"retCode": "OK"}
-			response.getWriter().print("{\"retCode\": \"OK\"}");
-		} else {
-			response.getWriter().print("{\"retCode\": \"NG\"}");
-		} 
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
+		try {
+			if(svc.addEvent(event)) {
+				//{"retCode": "OK"}
+				response.getWriter().print("{\"retCode\": \"OK\"}");
+			} else {
+				response.getWriter().print("{\"retCode\": \"NG\"}");
+			} 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void removeEvent(HttpServletRequest request, HttpServletResponse response) {
@@ -96,15 +96,39 @@ public class EventControl implements Control {
 		event.setTitle(title);
 		event.setStart(start);
 		event.setEnd(end);
-	try {
-		if(svc.removeEvent(event)) {
-			//{"retCode": "OK"}
-			response.getWriter().print("{\"retCode\": \"OK\"}");
-		} else {
-			response.getWriter().print("{\"retCode\": \"NG\"}");
+		try {
+			if(svc.removeEvent(event)) {
+				//{"retCode": "OK"}
+				response.getWriter().print("{\"retCode\": \"OK\"}");
+			} else {
+				response.getWriter().print("{\"retCode\": \"NG\"}");
+			} 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// chart의 json 데이터. 
+	public void chart(HttpServletRequest request, HttpServletResponse response) {
+		
+		List<Map<String, Object>> list = svc.countPerWriter();
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(list);
+		
+		try {
+			response.getWriter().print(json);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}	
+	
+	// chart의 페이지 호출.
+	public void showChart(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.getRequestDispatcher("admin/chart.tiles").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
 		} 
-	} catch (IOException e) {
-		e.printStackTrace();
 	}
-	}
+	
 }

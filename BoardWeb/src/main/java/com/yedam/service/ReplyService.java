@@ -19,4 +19,10 @@ public interface ReplyService {
 	List<Map<String, Object>> eventList();
 	boolean addEvent(SearchDTO event);
 	boolean removeEvent(SearchDTO event);
+	
+	//todo관련
+	List<Map<String, Object>> todoList();
+	
+	//chart관련
+	List<Map<String, Object>> countPerWriter();
 }

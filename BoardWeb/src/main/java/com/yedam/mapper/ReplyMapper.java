@@ -25,4 +25,10 @@ public interface ReplyMapper {
 	List<Map<String, Object>> selectEvent();
 	int insertEvent(SearchDTO event); //일정 추가
 	int deleteEvent(SearchDTO event);//일정 삭제
+	
+	//오늘의 할일 관련
+	List<Map<String, Object>> todoList();
+	
+	// 글 작성 건수와 작성자 차트
+	List<Map<String, Object>> countPerWriter();
 }
